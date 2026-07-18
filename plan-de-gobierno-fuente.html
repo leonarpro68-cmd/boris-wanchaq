@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Plan de Gobierno — Boris Aguilar, Wanchaq 2027-2030</title>
+<style>
+  /* Fuente para regenerar el PDF:
+     msedge --headless=new --print-to-pdf=public/plan-de-gobierno.pdf --no-pdf-header-footer plan-de-gobierno-fuente.html */
+  @page { size: A4; margin: 0; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --verde: #065f46;
+    --verde-oscuro: #022c22;
+    --verde-claro: #d1fae5;
+    --rojo: #dc2626;
+    --texto: #44403c;
+    --gris: #78716c;
+  }
+  body { font-family: "Segoe UI", Arial, sans-serif; color: var(--texto); }
+  .page {
+    width: 210mm; height: 297mm;
+    page-break-after: always;
+    padding: 16mm 18mm;
+    position: relative;
+    overflow: hidden;
+    background: #fff;
+  }
+  .page:last-child { page-break-after: auto; }
+
+  /* ---------- Portada ---------- */
+  .portada {
+    background: linear-gradient(160deg, #022c22 0%, #064e3b 55%, #065f46 100%);
+    color: #fff;
+    display: flex; flex-direction: column; align-items: center; text-align: center;
+    padding-top: 22mm;
+  }
+  .portada .logo { width: 34mm; height: 34mm; border-radius: 50%; object-fit: cover; border: 2mm solid #fff; }
+  .portada .movimiento {
+    margin-top: 8mm; font-size: 30px; font-weight: 800; letter-spacing: 0.35em;
+    color: #fff; border-bottom: 1.5mm solid var(--rojo); padding-bottom: 2mm;
+  }
+  .portada .lema { margin-top: 6mm; font-size: 17px; font-weight: 600; color: #a7f3d0; }
+  .portada .foto {
+    margin-top: 10mm; width: 62mm; height: 74mm; object-fit: cover; object-position: top;
+    border-radius: 31mm 31mm 6mm 6mm; border: 1.5mm solid rgba(255,255,255,0.25);
+  }
+  .portada h1 { margin-top: 9mm; font-size: 44px; font-weight: 800; letter-spacing: 0.02em; line-height: 1.05; }
+  .portada h1 .apellido { color: #6ee7b7; }
+  .portada .cargo {
+    margin-top: 3mm; display: inline-block; background: var(--rojo); color: #fff;
+    font-size: 14px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 2.2mm 7mm; border-radius: 6mm;
+  }
+  .portada .claves { margin-top: 11mm; display: flex; gap: 6mm; width: 100%; justify-content: center; }
+  .portada .clave {
+    flex: 1; max-width: 52mm; background: rgba(255,255,255,0.08);
+    border: 0.35mm solid rgba(255,255,255,0.22); border-radius: 4mm; padding: 5mm 4mm;
+  }
+  .portada .clave b { display: block; font-size: 12.5px; text-transform: uppercase; letter-spacing: 0.06em; color: #fff; }
+  .portada .clave span { font-size: 11px; color: #d1fae5; }
+  .portada .pie { position: absolute; bottom: 12mm; left: 0; right: 0; font-size: 10.5px; color: #a7f3d0; letter-spacing: 0.08em; }
+
+  /* ---------- Páginas interiores ---------- */
+  .cabecera {
+    display: flex; align-items: center; gap: 4mm;
+    border-bottom: 0.8mm solid var(--verde); padding-bottom: 3.5mm; margin-bottom: 8mm;
+  }
+  .cabecera img { width: 11mm; height: 11mm; border-radius: 50%; object-fit: cover; }
+  .cabecera .titulos b { display: block; font-size: 13px; color: var(--verde-oscuro); }
+  .cabecera .titulos span { font-size: 9.5px; color: var(--gris); text-transform: uppercase; letter-spacing: 0.14em; }
+  .cabecera .num { margin-left: auto; font-size: 9.5px; color: var(--gris); }
+
+  h2.seccion {
+    font-size: 21px; color: var(--verde-oscuro); font-weight: 800; margin-bottom: 2mm;
+  }
+  h2.seccion::after { content: ""; display: block; width: 16mm; height: 1.2mm; background: var(--rojo); border-radius: 1mm; margin-top: 1.6mm; }
+  .intro { font-size: 11.5px; color: var(--gris); margin-bottom: 6mm; margin-top: 3mm; }
+
+  p.cuerpo { font-size: 11.5px; line-height: 1.55; margin-bottom: 3.2mm; text-align: justify; }
+  .firma { margin-top: 5mm; }
+  .firma b { display: block; font-size: 12.5px; color: var(--verde-oscuro); }
+  .firma span { font-size: 10.5px; color: var(--gris); }
+
+  .dos-col { display: flex; gap: 10mm; }
+  .dos-col > div { flex: 1; }
+
+  h3.bloque { font-size: 13.5px; color: var(--rojo); font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; margin: 6mm 0 2.5mm; }
+  ul.checks { list-style: none; }
+  ul.checks li {
+    font-size: 11px; line-height: 1.45; margin-bottom: 2.2mm; padding-left: 6mm; position: relative;
+  }
+  ul.checks li::before {
+    content: "✓"; position: absolute; left: 0; top: 0;
+    color: #fff; background: var(--verde); border-radius: 50%;
+    width: 4.2mm; height: 4.2mm; font-size: 8.5px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .caja-vision {
+    background: var(--verde-claro); border-left: 1.5mm solid var(--verde);
+    border-radius: 0 3mm 3mm 0; padding: 5mm 6mm; margin-bottom: 2mm;
+  }
+  .caja-vision p { font-size: 11.5px; line-height: 1.5; color: #064e3b; font-weight: 500; }
+
+  /* Propuestas numeradas */
+  .propuesta { margin-bottom: 9mm; }
+  .propuesta .cab { display: flex; align-items: flex-start; gap: 4mm; margin-bottom: 2.5mm; }
+  .propuesta .n {
+    flex-shrink: 0; width: 9mm; height: 9mm; border-radius: 50%;
+    background: var(--rojo); color: #fff; font-size: 15px; font-weight: 800;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .propuesta h3 { font-size: 15px; color: var(--verde-oscuro); font-weight: 800; line-height: 1.2; }
+  .propuesta .sub { font-size: 10.5px; color: var(--gris); margin-top: 0.8mm; }
+  .propuesta ul.checks { columns: 2; column-gap: 8mm; margin-left: 13mm; }
+  .propuesta ul.checks li { break-inside: avoid; }
+
+  /* Página Plaza Túpac Amaru */
+  .banner {
+    background: linear-gradient(135deg, var(--verde-oscuro), var(--verde));
+    color: #fff; border-radius: 4mm; padding: 7mm 8mm; margin-bottom: 7mm;
+  }
+  .banner h2 { font-size: 19px; font-weight: 800; }
+  .banner p { font-size: 11px; color: #a7f3d0; margin-top: 1.5mm; }
+  .nivel { border: 0.35mm solid #d6d3d1; border-radius: 3mm; padding: 5mm 6mm; margin-bottom: 5mm; }
+  .nivel h3 { font-size: 12.5px; color: var(--rojo); text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 2mm; }
+  .nivel h3 small { display: block; font-size: 9.5px; color: var(--gris); letter-spacing: 0.1em; margin-bottom: 0.5mm; }
+
+  .pie-contacto {
+    position: absolute; bottom: 12mm; left: 18mm; right: 18mm;
+    border-top: 0.5mm solid #e7e5e4; padding-top: 4mm;
+    display: flex; justify-content: space-between; font-size: 9.5px; color: var(--gris);
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ PÁGINA 1: PORTADA ============ -->
+<div class="page portada">
+  <img class="logo" src="public/logo.png" alt="Logo Venceremos">
+  <div class="movimiento">VENCEREMOS</div>
+  <div class="lema">Wanchaq, un buen lugar para vivir</div>
+  <img class="foto" src="public/foto1.jpg" alt="Boris Aguilar">
+  <h1>Boris <span class="apellido">Aguilar</span></h1>
+  <div class="cargo">Alcalde de Wanchaq 2027 – 2030</div>
+  <div class="claves">
+    <div class="clave"><b>Más seguridad</b><span>para tu familia</span></div>
+    <div class="clave"><b>Más limpieza</b><span>para una ciudad que nos enorgullece</span></div>
+    <div class="clave"><b>Más áreas verdes</b><span>para una mejor calidad de vida</span></div>
+  </div>
+  <div class="pie">PLAN DE GOBIERNO · WANCHAQ · CUSCO</div>
+</div>
+
+<!-- ============ PÁGINA 2: VECINO WANCHINO + VISIÓN ============ -->
+<div class="page">
+  <div class="cabecera">
+    <img src="public/logo.png" alt="">
+    <div class="titulos"><b>Boris Aguilar · Venceremos</b><span>Plan de Gobierno · Wanchaq 2027–2030</span></div>
+    <div class="num">Página 2</div>
+  </div>
+
+  <div class="dos-col">
+    <div>
+      <h2 class="seccion">Vecino wanchino</h2>
+      <p class="cuerpo" style="margin-top:4mm">
+        Wanchaq significa germinación, crecimiento y desarrollo. Son valores que
+        reflejan la identidad de nuestro distrito y la capacidad de nuestra
+        comunidad para seguir avanzando y construir un mejor futuro.
+      </p>
+      <p class="cuerpo">
+        Mi vínculo con Wanchaq me ha permitido conocer de cerca las necesidades,
+        fortalezas y oportunidades de nuestro distrito. Desde esa experiencia,
+        valoro el esfuerzo de sus vecinos y el potencial que tenemos para seguir
+        creciendo juntos.
+      </p>
+      <p class="cuerpo">
+        Soy economista, investigador y gestor, con experiencia en la dirección de
+        proyectos de inversión pública, fortalecimiento institucional y desarrollo
+        social. Mi trabajo ha estado orientado a generar oportunidades y
+        contribuir al bienestar de las personas.
+      </p>
+      <p class="cuerpo">
+        Egresado de la Maestría en Gerencia Social de la Pontificia Universidad
+        Católica del Perú y Economista por la Universidad Nacional de San Antonio
+        Abad del Cusco, pero, sobre todo, soy un vecino wanchino que cree en el
+        diálogo, la participación y el trabajo conjunto.
+      </p>
+      <p class="cuerpo">
+        Sigamos construyendo un distrito con más oportunidades, bienestar y
+        desarrollo para todos.
+      </p>
+      <div class="firma">
+        <b>Boris Enrique Aguilar Luna</b>
+        <span>Economista · Investigador · Gestor<br>Wanchaq, un buen lugar para vivir</span>
+      </div>
+    </div>
+
+    <div>
+      <h2 class="seccion">Visión del distrito al 2030</h2>
+      <div class="caja-vision" style="margin-top:4mm">
+        <p>
+          Construir un Wanchaq donde cada familia tenga más oportunidades para
+          vivir mejor; un distrito seguro, moderno y emprendedor, que impulse el
+          desarrollo de las personas, fortalezca nuestra identidad cultural y
+          genere bienestar, progreso y calidad de vida para todos.
+        </p>
+      </div>
+
+      <h3 class="bloque">Políticas municipales</h3>
+      <ul class="checks">
+        <li>Una gestión transparente, eficiente y cercana a la gente.</li>
+        <li>Más seguridad para nuestras familias mediante prevención, tecnología y trabajo conjunto con los vecinos.</li>
+        <li>Recuperación y cuidado de parques, calles y espacios públicos.</li>
+        <li>Apoyo al emprendimiento, la inversión y la generación de empleo.</li>
+        <li>Un distrito limpio, ordenado y comprometido con el cuidado del medio ambiente.</li>
+        <li>Atención prioritaria a niños, jóvenes, adultos mayores y personas con discapacidad.</li>
+      </ul>
+
+      <h3 class="bloque">Nuestros principios</h3>
+      <ul class="checks">
+        <li>Honestidad y transparencia.</li>
+        <li>Respeto y cercanía con los vecinos.</li>
+        <li>Escuchar para actuar y resolver.</li>
+        <li>Uso responsable de los recursos públicos.</li>
+        <li>Trabajo, compromiso y resultados.</li>
+        <li>Amor por Wanchaq y confianza en su gente.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ============ PÁGINA 3: ¿QUÉ QUEREMOS? + PROPUESTAS 1-2 ============ -->
+<div class="page">
+  <div class="cabecera">
+    <img src="public/logo.png" alt="">
+    <div class="titulos"><b>Boris Aguilar · Venceremos</b><span>Plan de Gobierno · Wanchaq 2027–2030</span></div>
+    <div class="num">Página 3</div>
+  </div>
+
+  <h2 class="seccion">¿Qué queremos?</h2>
+  <ul class="checks" style="columns:2; column-gap:10mm; margin:4mm 0 8mm">
+    <li>Vivir en un distrito más seguro y tranquilo.</li>
+    <li>Tener más oportunidades para trabajar, emprender y progresar.</li>
+    <li>Contar con parques, calles y espacios públicos limpios y bien cuidados.</li>
+    <li>Acceder a servicios municipales más rápidos y eficientes.</li>
+    <li>Un distrito limpio, ordenado y bien cuidado para nuestras familias.</li>
+    <li>Promover el deporte, la cultura y actividades para toda la familia.</li>
+    <li>Construir un Wanchaq con más bienestar, oportunidades y calidad de vida.</li>
+  </ul>
+
+  <h2 class="seccion">Nuestras 6 propuestas</h2>
+  <p class="intro">Ejes concretos de trabajo para transformar el distrito.</p>
+
+  <div class="propuesta">
+    <div class="cab">
+      <div class="n">1</div>
+      <div>
+        <h3>Wanchaq seguro, limpio y ordenado</h3>
+        <div class="sub">Recuperaremos la tranquilidad y el orgullo de vivir en Wanchaq mediante tecnología moderna, prevención y una gestión eficiente de limpieza pública.</div>
+      </div>
+    </div>
+    <ul class="checks">
+      <li>Drones de vigilancia y monitoreo preventivo en tiempo real.</li>
+      <li>Cámaras inteligentes y central de monitoreo operativa las 24 horas.</li>
+      <li>Patrullaje integrado entre Serenazgo, Policía y vecinos organizados.</li>
+      <li>Recuperación de parques y espacios públicos para las familias.</li>
+      <li>Limpieza eficiente, reciclaje y cultura ciudadana.</li>
+      <li>Ordenamiento del comercio y recuperación de veredas.</li>
+      <li>Soterrado progresivo de cables para una ciudad más limpia y moderna.</li>
+    </ul>
+  </div>
+
+  <div class="propuesta">
+    <div class="cab">
+      <div class="n">2</div>
+      <div>
+        <h3>La Alameda de la Cultura</h3>
+        <div class="sub">Más espacios para caminar, encontrarse y disfrutar en familia.</div>
+      </div>
+    </div>
+    <ul class="checks">
+      <li>Áreas de lectura, descanso y recreación.</li>
+      <li>Wi-Fi gratuito y cargadores solares.</li>
+      <li>Árboles y plantas nativas del Cusco.</li>
+      <li>Iluminación LED solar y mobiliario urbano moderno.</li>
+      <li>Espacios seguros y accesibles para todos.</li>
+      <li>Más de 4 kilómetros de integración peatonal y conexión entre barrios.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ============ PÁGINA 4: PROPUESTAS 3-6 ============ -->
+<div class="page">
+  <div class="cabecera">
+    <img src="public/logo.png" alt="">
+    <div class="titulos"><b>Boris Aguilar · Venceremos</b><span>Plan de Gobierno · Wanchaq 2027–2030</span></div>
+    <div class="num">Página 4</div>
+  </div>
+
+  <div class="propuesta">
+    <div class="cab">
+      <div class="n">3</div>
+      <div>
+        <h3>Más salud para nuestras familias</h3>
+        <div class="sub">Impulsaremos la culminación y puesta en funcionamiento del Hospital del Cáncer para brindar atención especializada a miles de familias de Cusco.</div>
+      </div>
+    </div>
+    <ul class="checks">
+      <li>Consultorios y servicios médicos especializados.</li>
+      <li>Equipamiento oncológico de última generación.</li>
+      <li>Mayor capacidad de atención y diagnóstico oportuno.</li>
+      <li>Atención integral para pacientes y sus familias.</li>
+    </ul>
+  </div>
+
+  <div class="propuesta">
+    <div class="cab">
+      <div class="n">4</div>
+      <div>
+        <h3>Mercados modernos para las familias</h3>
+        <div class="sub">Construcción y modernización integral de los mercados de Wanchaq y Ttio.</div>
+      </div>
+    </div>
+    <ul class="checks">
+      <li>Infraestructura moderna, segura y funcional.</li>
+      <li>Mejores condiciones sanitarias.</li>
+      <li>Mayor comodidad para comerciantes y consumidores.</li>
+      <li>Estacionamiento y frigorífico subterráneo.</li>
+      <li>Mercados dignos para las familias wanchinas.</li>
+    </ul>
+  </div>
+
+  <div class="propuesta">
+    <div class="cab">
+      <div class="n">5</div>
+      <div>
+        <h3>Complejo cultural y de entretenimiento Arena Wanchaq</h3>
+        <div class="sub">Wanchaq volverá a ser escenario de grandes eventos culturales, deportivos y artísticos.</div>
+      </div>
+    </div>
+    <ul class="checks">
+      <li>Nueva sede del Festival Internacional del Cusco.</li>
+      <li>Conciertos, convenciones y ferias nacionales e internacionales.</li>
+      <li>Tecnología moderna, seguridad y amplios espacios.</li>
+      <li>Oportunidades para artistas, emprendedores y jóvenes.</li>
+      <li>Más empleo y dinamización de la economía local.</li>
+    </ul>
+  </div>
+
+  <div class="propuesta">
+    <div class="cab">
+      <div class="n">6</div>
+      <div>
+        <h3>Más oportunidades para crecer</h3>
+        <div class="sub">Wanchaq: distrito financiero, tecnológico y comercial.</div>
+      </div>
+    </div>
+    <ul class="checks">
+      <li>Simplificación de trámites y apoyo a la formalización.</li>
+      <li>Ningún negocio será perseguido por querer crecer.</li>
+      <li>Programa Municipal de Desarrollo Vertical y Renovación Urbana para simplificar licencias y promover edificaciones seguras.</li>
+      <li>Fortalecimiento de la inversión privada.</li>
+      <li>Acompañamiento técnico para nuevas inversiones y edificaciones.</li>
+      <li>Más empleo, innovación y oportunidades para todos.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ============ PÁGINA 5: PLAZA TÚPAC AMARU ============ -->
+<div class="page">
+  <div class="cabecera">
+    <img src="public/logo.png" alt="">
+    <div class="titulos"><b>Boris Aguilar · Venceremos</b><span>Plan de Gobierno · Wanchaq 2027–2030</span></div>
+    <div class="num">Página 5</div>
+  </div>
+
+  <div class="banner">
+    <h2>Plaza Túpac Amaru: el nuevo corazón de Wanchaq</h2>
+    <p>Símbolo de nuestra historia, identidad y futuro. Un moderno complejo urbano de 3 niveles para la cultura, la movilidad y el encuentro ciudadano.</p>
+  </div>
+
+  <div class="nivel">
+    <h3><small>1er subterráneo</small>Centro de Convenciones y Formación</h3>
+    <ul class="checks">
+      <li>Moderno Centro de Convenciones para eventos y reuniones.</li>
+      <li>Salas multifuncionales para jóvenes, escolares y organizaciones.</li>
+      <li>Espacios para danza, arte, capacitación y desarrollo cultural.</li>
+      <li>Equipamiento moderno de iluminación y sonido para actividades académicas, culturales y artísticas.</li>
+    </ul>
+  </div>
+
+  <div class="nivel">
+    <h3><small>2do subterráneo</small>Estacionamiento Inteligente</h3>
+    <ul class="checks">
+      <li>Más de 600 estacionamientos para vehículos, motocicletas y bicicletas.</li>
+      <li>Accesos modernos mediante ascensores y sistemas automatizados.</li>
+      <li>Seguridad permanente y monitoreo las 24 horas.</li>
+      <li>Menos congestión vehicular y mayor orden en el entorno de la plaza.</li>
+    </ul>
+  </div>
+
+  <div class="nivel">
+    <h3>Centro de Bienestar Animal Wanchaq</h3>
+    <ul class="checks">
+      <li>Amor, cuidado y protección para nuestras mascotas.</li>
+      <li>Construiremos el primer Centro Municipal de Bienestar Animal de Wanchaq, un espacio moderno para promover la tenencia responsable de mascotas y proteger la salud pública.</li>
+      <li>Porque una ciudad que cuida a sus mascotas también cuida a sus familias.</li>
+    </ul>
+  </div>
+
+  <div class="caja-vision">
+    <p>«El verdadero plan lo construiremos junto a los vecinos.» — Conoce nuestras propuestas, comparte tus ideas y súmate al cambio. Tu opinión también construye Wanchaq.</p>
+  </div>
+
+  <div class="pie-contacto">
+    <span>Movimiento Venceremos · Boris Aguilar</span>
+    <span>boris-wanchaq.vercel.app</span>
+    <span>Wanchaq · Cusco · Perú</span>
+  </div>
+</div>
+
+</body>
+</html>
