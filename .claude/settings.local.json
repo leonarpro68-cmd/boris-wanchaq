@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(Remove-Item *)",
+      "PowerShell(Copy-Item *)",
+      "PowerShell($sp = \"C:\\\\Users\\\\leona\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\C--Users-leona-OneDrive-Escritorio-PaginaPartido\\\\42e590fd-23c1-41b7-bfbe-d03b50843fd7\\\\scratchpad\"; Add-Type -AssemblyName System.Drawing; $src = [System.Drawing.Bitmap]::FromFile\\(\"$sp\\\\assets\\\\poster.png\"\\); $rect = New-Object System.Drawing.Rectangle 270, 45, 403, 660; $crop = $src.Clone\\($rect, $src.PixelFormat\\); $crop.Save\\(\"public\\\\boris-hero.png\", [System.Drawing.Imaging.ImageFormat]::Png\\); $src.Dispose\\(\\); $crop.Dispose\\(\\); \"Recorte guardado: 403x660\")",
+      "PowerShell($sp = \"C:\\\\Users\\\\leona\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\C--Users-leona-OneDrive-Escritorio-PaginaPartido\\\\42e590fd-23c1-41b7-bfbe-d03b50843fd7\\\\scratchpad\"; Add-Type -AssemblyName System.Drawing; $src = [System.Drawing.Bitmap]::FromFile\\(\"$sp\\\\assets\\\\poster.png\"\\); $rect = New-Object System.Drawing.Rectangle 385, 55, 288, 650; $crop = $src.Clone\\($rect, $src.PixelFormat\\); $crop.Save\\(\"public\\\\boris-hero2.png\", [System.Drawing.Imaging.ImageFormat]::Png\\); $src.Dispose\\(\\); $crop.Dispose\\(\\); \"ok\")",
+      "PowerShell($env:Path = \"C:\\\\Program Files\\\\nodejs;\" + $env:Path; npx --yes serve out -l 3999)",
+      "PowerShell(Out-Null *)",
+      "PowerShell(npm run *)",
+      "PowerShell($paths = @\\(\"C:\\\\Program Files\\\\nodejs\\\\npm.cmd\", \"$env:LOCALAPPDATA\\\\Programs\\\\nodejs\\\\npm.cmd\", \"$env:APPDATA\\\\npm\\\\npm.cmd\", \"$env:LOCALAPPDATA\\\\fnm_multishells\", \"$env:USERPROFILE\\\\scoop\\\\shims\\\\npm.cmd\"\\); foreach \\($p in $paths\\) { if \\(Test-Path $p\\) { Write-Output \"FOUND: $p\" } }; if \\(Test-Path \"$env:USERPROFILE\\\\AppData\\\\Local\\\\nvs\"\\) { Write-Output \"nvs exists\" }; if \\(Test-Path \"$env:APPDATA\\\\nvm\"\\) { Write-Output \"nvm exists: $env:APPDATA\\\\nvm\" }; if \\(Test-Path \"$env:LOCALAPPDATA\\\\Volta\"\\) { Write-Output \"volta exists\" })"
+    ]
+  }
+}
